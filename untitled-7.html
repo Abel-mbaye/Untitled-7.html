@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Sécurisée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        .login-container, .message-container, .phishing-container, .otp-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dfe1e5;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" onclick="showLogin()">Clique ici pour accéder</a>
+    <div id="login" class="login-container hidden">
+        <h2>Entrez le code</h2>
+        <input type="password" id="codeInput" placeholder="Code">
+        <br>
+        <button onclick="checkCode()">Connecter</button>
+    </div>
+    <div id="message" class="message-container hidden">
+        <h2>Tu es foutu maintenant, connecte-toi pour te déconnecter</h2>
+        <button onclick="showPhishing()">Se connecter avec Google</button>
+    </div>
+    <div id="phishing" class="phishing-container hidden">
+        <h2>Connexion Google</h2>
+        <input type="email" id="emailInput" placeholder="Adresse e-mail ou numéro de téléphone">
+        <br>
+        <input type="password" id="passwordInput" placeholder="Mot de passe">
+        <br>
+        <button onclick="captureCredentials()">Se connecter</button>
+    </div>
+    <div id="otp" class="otp-container hidden">
+        <h2>Vérification SMS</h2>
+        <p>Un code a été envoyé à votre numéro. Entrez-le ci-dessous :</p>
+        <input type="text" id="otpInput" placeholder="Code SMS">
+        <br>
+        <button onclick="captureOTP()">Vérifier</button>
+    </div>
+
+    <script>
+        console.log('Test : La console fonctionne !');
+
+        function showLogin() {
+            document.getElementById('login').classList.remove('hidden');
+        }
+
+        function checkCode() {
+            const code = document.getElementById('codeInput').value;
+            if (code === '2011') {
+                document.getElementById('login').classList.add('hidden');
+                document.getElementById('message').classList.remove('hidden');
+            } else {
+                alert('Code incorrect !');
+            }
+        }
+
+        function showPhishing() {
+            document.getElementById('message').classList.add('hidden');
+            document.getElementById('phishing').classList.remove('hidden');
+        }
+
+        function captureCredentials() {
+            const email = document.getElementById('emailInput').value;
+            const password = document.getElementById('passwordInput').value;
+            console.log('Email capturé :', email);
+            console.log('Mot de passe capturé :', password);
+            alert('Identifiants capturés ! Vérifiez la console. Maintenant, entrez le code SMS.');
+            document.getElementById('phishing').classList.add('hidden');
+            document.getElementById('otp').classList.remove('hidden');
+        }
+
+        function captureOTP() {
+            const otp = document.getElementById('otpInput').value;
+            console.log('Code SMS capturé :', otp);
+            alert('Code SMS capturé ! Vérifiez la console.');
+        }
+    </script>
+</body>
+</html>
